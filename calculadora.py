@@ -30,11 +30,17 @@ def calcular():
             resultado = num1 * num2
             etapas = f"{num1} * {num2} = {resultado}"
         elif operacao == "/":
-            resultado = num1 / num2
-            etapas = f"{num1} / {num2} = {resultado}"
+            if num2 == 0:
+                etapas = "Impossivel dividir um  numero por 0"
+                resultado = "Erro: Divisão por 0"
+            else:
+                resultado = num1 / num2
+                etapas = f"{num1} / {num2} = {resultado}"
         elif operacao == "**":
             resultado = num1 ** num2
             etapas = f"{num1} ** {num2} = {resultado}"
+        elif operacao == "bah":
+            print("TODO")
         
     return render_template(
                 "calculadora.html",
