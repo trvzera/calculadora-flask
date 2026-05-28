@@ -23,3 +23,22 @@ def calcular():
         if operacao == "+":
             resultado = num1 + num2
             etapas = f"{num1} + {num2} = {resultado}"
+        elif operacao == "-":
+            resultado = num1 - num2
+            etapas = f"{num1} - {num2} = {resultado}"
+        elif operacao == "*":
+            resultado = num1 * num2
+            etapas = f"{num1} * {num2} = {resultado}"
+        elif operacao == "/":
+            resultado = num1 / num2
+            etapas = f"{num1} / {num2} = {resultado}"
+        elif operacao == "**":
+            resultado = num1 ** num2
+            etapas = f"{num1} ** {num2} = {resultado}"
+        
+    return render_template(
+                "calculadora.html",
+                etapas=etapas,
+                resultados=resultado,
+            )
+    

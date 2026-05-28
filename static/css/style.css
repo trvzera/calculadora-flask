@@ -34,6 +34,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  align-items: center;
 }
 
 #op-container {
@@ -117,4 +118,21 @@ a {
   display: inline-block;
   margin-top: 12px;
   color: #2563eb;
+}
+
+#grupo-num2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  padding: 12px 24px;
+  border-radius: 40px;
+  background-color: #0267ff;
+  color: #e5e5ea;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0px 8px 20px rgba(2, 103, 255, 0.4);
 }
