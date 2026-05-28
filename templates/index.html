@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <section>
+    <div id="container">
+      <h1>Calculadora</h1>
+      <form method="POST" action="{{ url_for('index') }}">
+        <label for="num1">Primeiro número</label>
+        <input type="number" id="num1" name="num1" step="any" required value="{{ request.form.get('num1', '') }}">
+        <p>Operações</p>
+        <div id="op-container">
+          <div class="operacao-container">
+            <input type="radio" name="operacao" class="rd-op" {% if op=='+' %}selected{% endif %} onclick="atualizarNum2()">
+            <div class="operacao">
+              <p>+</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" name="operacao" class="rd-op" {% if op=='-' %}selected{% endif %} onclick="atualizarNum2()">
+            <div class="operacao">
+              <p>-</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" name="operacao" class="rd-op" {% if op=='*' %}selected{% endif %} onclick="atualizarNum2()">
+            <div class="operacao">
+              <p>×</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" name="operacao" class="rd-op" {% if op=='/' %}selected{% endif %} onclick="atualizarNum2()">
+            <div class="operacao">
+              <p>÷</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" name="operacao" class="rd-op" {% if op=='**' %}selected{% endif %} onclick="atualizarNum2()">
+            <div class="operacao">
+              <p>^</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" name="operacao" id="sqrt" class="rd-op" {% if op=='sqrt' %}selected{% endif %} onclick="atualizarNum2()" value="sqrt">
+            <div class="operacao">
+              <p>√</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" name="operacao" class="rd-op" onclick="atualizarNum2()">
+            <div class="operacao">
+              <p>⃤</p>
+            </div>
+          </div>
+        </div>
+        <div id="grupo-num2">
+          <label for="num2">Segundo número</label>
+          <input type="number" id="num2" name="num2" step="any" value="{{ request.form.get('num2', '') }}">
+        </div>
+        <button type="submit">Calcular</button>
+      </form>
+      {% if etapas %}
+      <div class="resultado">
+        <strong>Resposta do servidor (Python):</strong>
+        <div>{{ etapas }}</div>
+        <div>Resultado: {{ resultados }}</div>
+      </div>
+      {% endif %}
+      <a href="{{ url_for('index') }}">Limpar / nova conta</a>
+    </div>
+  </section>
+  <script>
+    function atualizarNum2() {
+      const raiz = document.getElementById("sqrt");
+      const grupo = document.getElementById("grupo-num2");
+      const num2 = document.getElementById("num2");
+      if (raiz.checked) {
+        grupo.style.display = "none"
+        num2.required = !raiz;
+        if (raiz) num2.value = "";
+      }
+      else {
+        grupo.style.display = "block"
+      }
+    }
+    atualizarNum2();
+  </script>
+
+</body>
+
+</html>
