@@ -19,43 +19,43 @@
         </div>
         <div id="op-container">
           <div class="operacao-container">
-            <input type="radio" value="+" name="operacao" class="rd-op" {% if op=='+' %}selected{% endif %} onclick="atualizarNum2()">
+            <input type="radio" value="+" name="operacao" class="rd-op" {% if op=='+' %}selected{% endif %} onclick="atualizarNum()">
             <div class="operacao">
               <p>+</p>
             </div>
           </div>
           <div class="operacao-container">
-            <input type="radio" value="-" name="operacao" class="rd-op" {% if op=='-' %}selected{% endif %} onclick="atualizarNum2()">
+            <input type="radio" value="-" name="operacao" class="rd-op" {% if op=='-' %}selected{% endif %} onclick="atualizarNum()">
             <div class="operacao">
               <p>-</p>
             </div>
           </div>
           <div class="operacao-container">
-            <input type="radio" value="*" name="operacao" class="rd-op" {% if op=='*' %}selected{% endif %} onclick="atualizarNum2()">
+            <input type="radio" value="*" name="operacao" class="rd-op" {% if op=='*' %}selected{% endif %} onclick="atualizarNum()">
             <div class="operacao">
               <p>×</p>
             </div>
           </div>
           <div class="operacao-container">
-            <input type="radio" value="/" name="operacao" class="rd-op" {% if op=='/' %}selected{% endif %} onclick="atualizarNum2()">
+            <input type="radio" value="/" name="operacao" class="rd-op" {% if op=='/' %}selected{% endif %} onclick="atualizarNum()">
             <div class="operacao">
               <p>÷</p>
             </div>
           </div>
           <div class="operacao-container">
-            <input type="radio" value="**" name="operacao" class="rd-op" {% if op=='**' %}selected{% endif %} onclick="atualizarNum2()">
+            <input type="radio" value="**" name="operacao" class="rd-op" {% if op=='**' %}selected{% endif %} onclick="atualizarNum()">
             <div class="operacao">
               <p>^</p>
             </div>
           </div>
           <div class="operacao-container">
-            <input type="radio" name="operacao" id="sqrt" class="rd-op" {% if op=='sqrt' %}selected{% endif %} onclick="atualizarNum2()" value="sqrt">
+            <input type="radio" name="operacao" id="sqrt" class="rd-op" {% if op=='sqrt' %}selected{% endif %} onclick="atualizarNum()" value="sqrt">
             <div class="operacao">
               <p>√</p>
             </div>
           </div>
           <div class="operacao-container">
-            <input type="radio" name="operacao" class="rd-op" onclick="atualizarNum2()" />
+            <input type="radio" name="operacao" id="bah" class="rd-op" {% if op=='bah' %}selected{% endif %} onclick="atualizarNum()" />
             <div class="operacao">
               <p>⃤</p>
             </div>
@@ -63,6 +63,9 @@
         </div>
         <div id="grupo-num2">
           <input type="number" id="num2" name="num2" step="any" value="{{ request.form.get('num2', '') }}" placeholder="Segundo Número" />
+        </div>
+        <div id="grupo-num3">
+          <input type="number" id="num3" name="num3" step="any" value="{{ request.form.get('num3', '') }}" placeholder="Terceiro Número" onclick="atualizarNum()" />
         </div>
         <button type="submit">Calcular</button>
       </form>
@@ -77,19 +80,133 @@
     </div>
   </section>
   <script>
-    function atualizarNum2() {
+    function atualizarNum() {
       const raiz = document.getElementById("sqrt");
-      const grupo = document.getElementById("grupo-num2");
+      const grupo2 = document.getElementById("grupo-num2");
       const num2 = document.getElementById("num2");
+      const num3 = document.getElementById("bah")
+      const grupo3 = document.getElementById("grupo-num3")
       if (raiz.checked) {
-        grupo.style.display = "none";
+        grupo2.style.display = "none";
         num2.required = !raiz;
         if (raiz) num2.value = "";
       } else {
-        grupo.style.display = "block";
+        grupo2.style.display = "flex";
+      }
+      if (num3.checked) {
+        grupo3.style.display = "flex"
+      }
+      else {
+        grupo3.style.display = "none"
       }
     }
-    atualizarNum2();
+    atualizarNum();
+  </script>
+</body>
+
+</html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="./static/css/style.css">
+</head>
+
+<body>
+  <section>
+    <div id="container">
+      <h1>Calculadora</h1>
+      <form method="POST" action="{{ url_for('index') }}">
+        <div id="grupo-num1">
+          <input type="number" id="num1" name="num1" step="any" required value="{{ request.form.get('num1', '') }}" placeholder="Primeiro Número" />
+        </div>
+        <div id="op-container">
+          <div class="operacao-container">
+            <input type="radio" value="+" name="operacao" class="rd-op" {% if op=='+' %}selected{% endif %} onclick="atualizarNum()">
+            <div class="operacao">
+              <p>+</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" value="-" name="operacao" class="rd-op" {% if op=='-' %}selected{% endif %} onclick="atualizarNum()">
+            <div class="operacao">
+              <p>-</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" value="*" name="operacao" class="rd-op" {% if op=='*' %}selected{% endif %} onclick="atualizarNum()">
+            <div class="operacao">
+              <p>×</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" value="/" name="operacao" class="rd-op" {% if op=='/' %}selected{% endif %} onclick="atualizarNum()">
+            <div class="operacao">
+              <p>÷</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" value="**" name="operacao" class="rd-op" {% if op=='**' %}selected{% endif %} onclick="atualizarNum()">
+            <div class="operacao">
+              <p>^</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" name="operacao" id="sqrt" class="rd-op" {% if op=='sqrt' %}selected{% endif %} onclick="atualizarNum()" value="sqrt">
+            <div class="operacao">
+              <p>√</p>
+            </div>
+          </div>
+          <div class="operacao-container">
+            <input type="radio" name="operacao" id="bah" class="rd-op" {% if op=='bah' %}selected{% endif %} onclick="atualizarNum()" />
+            <div class="operacao">
+              <p>⃤</p>
+            </div>
+          </div>
+        </div>
+        <div id="grupo-num2">
+          <input type="number" id="num2" name="num2" step="any" value="{{ request.form.get('num2', '') }}" placeholder="Segundo Número" />
+        </div>
+        <div id="grupo-num3">
+          <input type="number" id="num3" name="num3" step="any" value="{{ request.form.get('num3', '') }}" placeholder="Terceiro Número" onclick="atualizarNum()" />
+        </div>
+        <button type="submit">Calcular</button>
+      </form>
+      {% if etapas %}
+      <div class="resultado">
+        <strong>Resposta do servidor (Python):</strong>
+        <div>{{ etapas }}</div>
+        <div>Resultado: {{ resultados }}</div>
+      </div>
+      {% endif %}
+      <a href="{{ url_for('index') }}">Limpar / nova conta</a>
+    </div>
+  </section>
+  <script>
+    function atualizarNum() {
+      const raiz = document.getElementById("sqrt");
+      const grupo2 = document.getElementById("grupo-num2");
+      const num2 = document.getElementById("num2");
+      const num3 = document.getElementById("bah")
+      const grupo3 = document.getElementById("grupo-num3")
+      if (raiz.checked) {
+        grupo2.style.display = "none";
+        num2.required = !raiz;
+        if (raiz) num2.value = "";
+      } else {
+        grupo2.style.display = "flex";
+      }
+      if (num3.checked) {
+        grupo3.style.display = "flex"
+      }
+      else {
+        grupo3.style.display = "none"
+      }
+    }
+    atualizarNum();
   </script>
 </body>
 
