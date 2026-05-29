@@ -60,6 +60,12 @@
               <p>⃤</p>
             </div>
           </div>
+          <div class="operacao-container">
+            <input type="radio" name="operacao" id="log" class="rd-op" {% if op=='log' %}selected{% endif %} onclick="atualizarNum()" />
+            <div class="operacao">
+              <p id="log-p">Log2</p>
+            </div>
+          </div>
         </div>
         <div id="grupo-num2">
           <input type="number" id="num2" name="num2" step="any" value="{{ request.form.get('num2', '') }}" placeholder="Segundo Número" />
@@ -82,14 +88,16 @@
   <script>
     function atualizarNum() {
       const raiz = document.getElementById("sqrt");
+      const log = document.getElementById("log");
       const grupo2 = document.getElementById("grupo-num2");
       const num2 = document.getElementById("num2");
       const num3 = document.getElementById("bah")
       const grupo3 = document.getElementById("grupo-num3")
-      if (raiz.checked) {
+      if (raiz.checked || log.checked) {
         grupo2.style.display = "none";
         num2.required = !raiz;
-        if (raiz) num2.value = "";
+        num2.required = !log
+        if (raiz || log) num2.value = "";
       } else {
         grupo2.style.display = "flex";
       }

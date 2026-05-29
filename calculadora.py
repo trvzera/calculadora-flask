@@ -11,6 +11,9 @@ def calcular():
         else:
             resultado = math.sqrt(num1)
             etapas = f"√{num1} = {resultado}"
+    elif operacao == "log":
+            resultado = math.log(num1, 10)
+            etapas = f"{num1} na base 10 = {resultado} pois 10 elevado a {resultado} = {num1}"
     else:
         num2_valor = request.form.get("num2", "").strip()
         if not num2_valor:
